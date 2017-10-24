@@ -6,7 +6,7 @@
   "description": "",
   "main": "",
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/mwlong23/doctor-lookup",
   "ignore": [
     "**/.*",
     "node_modules",

@@ -4,14 +4,55 @@ exports.apiKey = "3cf0ffbb88fae132f82086fd2704ace2"
 },{}],2:[function(require,module,exports){
 'use strict';
 
-var apiKey = require('./../.env').apiKey;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DoctorSearch = undefined;
 
-var resource_url = 'https://api.betterdoctor.com/2016-03-01/doctors?location=37.773,-122.413,100&skip=2&limit=10&user_key=' + apiKey;
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-$.get(resource_url, function (data) {
-    // data: { meta: {<metadata>}, data: {<array[Practice]>} }
-    var template = Handlebars.compile(document.getElementById('docs-template').innerHTML);
-    document.getElementById('content-placeholder').innerHTML = template(data);
+var _env = require('./../.env');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var DoctorSearch = exports.DoctorSearch = function () {
+  function DoctorSearch() {
+    _classCallCheck(this, DoctorSearch);
+  }
+
+  _createClass(DoctorSearch, [{
+    key: 'search',
+    value: function search(searchTerm, category) {
+      return $.get('https://api.betterdoctor.com/2016-03-01/doctors?location=37.773,-122.413,100&skip=2&limit=10&user_key=' + _env.apiKey);
+    }
+  }, {
+    key: 'find',
+    value: function find(url) {
+      return $.get(url);
+    }
+  }]);
+
+  return DoctorSearch;
+}();
+
+},{"./../.env":1}],3:[function(require,module,exports){
+'use strict';
+
+var _doctorLookup = require('./../js/doctor-lookup.js');
+
+var doctorSearch = new _doctorLookup.DoctorSearch();
+
+$(document).ready(function () {
+  $('#search').submit(function () {
+    var category = $('#category').val();
+    var searchCriteria = $('#search-criteria').val();
+  });
 });
 
-},{"./../.env":1}]},{},[2]);
+// $.get(resource_url, function (data) {
+//     // data: { meta: {<metadata>}, data: {<array[Practice]>} }
+//     var template = Handlebars.compile(document.getElementById('docs-template').innerHTML);
+//     document.getElementById('content-placeholder').innerHTML = template(data);
+// });
+
+},{"./../js/doctor-lookup.js":2}]},{},[3]);
