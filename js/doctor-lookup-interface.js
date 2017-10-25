@@ -1,45 +1,54 @@
-// import { DoctorSearch } from './../js/doctor-lookup.js'
-const doctorSearch = new DoctorSearch();
+import { DoctorSearch } from './../js/doctor-lookup.js';
+let doctorSearch = new DoctorSearch();
+let apiKey = '3cf0ffbb88fae132f82086fd2704ace2';
 
+$(document).ready(function() {
+  $('#search').submit(function(event){
+    event.preventDefault();
 
-export class DoctorSearch{
-  search(searchTerm, category){
-    return $.get(`https://api.betterdoctor.com/2016-03-01/doctors?location=37.773,-122.413,100&skip=2&limit=10&user_key=${apiKey}`)
-  }
-
-  find(url){
-    return $.get(url);
-  }
-}
-
-
-$(document).ready(function(){
-  $('#search').submit(function(e){
-    e.preventDefault();
     let category = $('#category').val();
     let searchCriteria = $('#search-criteria').val();
+    // let responsePromise = doctorSearch.search(searchCriteria, category);
+    let results = doctorSearch.search(searchCriteria, category);
+    debugger;
 
-  })
+    // $('search-criteria').val('');
+
+  });
 })
 
+// $(document).ready(function () {
+//   $('#search').submit(function (event) {
+//     event.preventDefault();
+//
+//
+//     $('.results').html("");
+//     let searchTerm = $('#search-term').val();
+//     let category = $('#category').val();
+//     let responsePromise = starWars.search(searchTerm, category);
+//     responsePromise.then(function(response) {
+//       displayData(response);
+//     })
+//     .fail(function(error) {
+//       $('.results').append(`<h3>There was an error: ${error.responseText} </h3>`);
+//     });
+//   });
+// });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// let displayProperty = {
+//
+//
+//
+//
+// }
+//
+// let displayData = function(response) {
+//   let result = response.results[0];
+//   Object.keys(result).forEach(function(key){
+//     console.log(result[key]);
+//     displayProperty(key, result[key]);
+//   });
+// }
 
 // $.get(resource_url, function (data) {
 //     // data: { meta: {<metadata>}, data: {<array[Practice]>} }
